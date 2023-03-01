@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="recentInfo"
+            type="com.kkc.entity.dto.RecentAnalyticsDto" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="12dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/recentGameCount"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:includeFontPadding="false"
+            android:textSize="10sp"
+            android:textColor="@color/cool_grey"
+            android:text="@{@string/summoner_recent_info_recent_games(recentInfo.recentTotalGameCount)}"/>
+
+        <TextView
+            android:id="@+id/recentWinLose"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/recentGameCount"
+            app:layout_constraintTop_toBottomOf="@id/recentGameCount"
+            app:layout_constraintEnd_toEndOf="@id/recentGameCount"
+            android:layout_marginTop="10dp"
+            android:includeFontPadding="false"
+            android:textSize="10sp"
+            android:textColor="@color/cool_grey"
+            android:text="@{@string/summoner_recent_info_win_and_lose(recentInfo.recentWins, recentInfo.recentLoses)}"/>
+
+        <TextView
+            android:id="@+id/recentKillAssistDeathAvg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/recentGameCount"
+            app:layout_constraintTop_toBottomOf="@id/recentWinLose"
+            app:layout_constraintEnd_toEndOf="@id/recentGameCount"
+            android:layout_marginTop="2dp"
+            android:includeFontPadding="false"
+            android:textSize="14sp"
+            android:textColor="@color/charcoal_grey"
+            app:spannedText="@{@string/summoner_recent_kill_assist_death_avg(recentInfo.recentKillAvg, recentInfo.recentAssistAvg, recentInfo.recentDeathAvg)}"/>
+
+        <TextView
+            android:id="@+id/recentKdaWinningRate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/recentGameCount"
+            app:layout_constraintTop_toBottomOf="@id/recentKillAssistDeathAvg"
+            app:layout_constraintEnd_toStartOf="@id/recentMostWinningRate"
+            android:layout_marginTop="3dp"
+            android:includeFontPadding="false"
+            android:textSize="10sp"
+            android:textColor="@color/soft_blue"
+            app:spannedText="@{@string/summoner_recent_kda_winningRate(recentInfo.kda, recentInfo.recentWinningRate)}"/>
+
+        <TextView
+            android:id="@+id/recentMostWinningRate"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/recentGameCount"
+            app:layout_constraintTop_toTopOf="@id/recentGameCount"
+            android:layout_marginStart="28dp"
+            android:includeFontPadding="false"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:textColor="@color/cool_grey"
+            android:text="@string/summoner_recent_most_winning_rate"/>
+
+        <com.kkc.summonerinfo.summonGameInfo.customViews.MostWinningRateChampionView
+            android:id="@+id/firstMostWinningRateChamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/recentMostWinningRate"
+            app:layout_constraintTop_toBottomOf="@id/recentMostWinningRate"
+            app:layout_constraintEnd_toStartOf="@id/secondMostWinningRateChamp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:layout_marginTop="8dp"
+            app:mostWinningRateInfo="@{recentInfo.mostWinningRateFirst}"
+            android:visibility="@{recentInfo.mostWinningRateFirst.visible ? View.VISIBLE : View.GONE, default=gone}"/>
+
+        <com.kkc.summonerinfo.summonGameInfo.customViews.MostWinningRateChampionView
+            android:id="@+id/secondMostWinningRateChamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/firstMostWinningRateChamp"
+            app:layout_constraintTop_toTopOf="@id/firstMostWinningRateChamp"
+            app:layout_constraintEnd_toEndOf="@id/recentMostWinningRate"
+            android:layout_marginStart="16dp"
+            app:mostWinningRateInfo="@{recentInfo.mostWinningRateSecond}"
+            android:visibility="@{recentInfo.mostWinningRateSecond.visible ? View.VISIBLE : View.GONE, default=gone}"/>
+
+        <TextView
+            android:id="@+id/recentPosition"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/recentMostWinningRate"
+            app:layout_constraintTop_toTopOf="@id/recentGameCount"
+            android:includeFontPadding="false"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:textColor="@color/cool_grey"
+            android:text="@string/summoner_recent_most_winning_position"/>
+
+        <ImageView
+            android:id="@+id/recentPositionImage"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:layout_constraintStart_toStartOf="@id/recentPosition"
+            app:layout_constraintTop_toBottomOf="@id/recentPosition"
+            app:layout_constraintEnd_toEndOf="@id/recentPosition"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/icon_lol_top"/>
+
+        <TextView
+            android:id="@+id/recentPositionRate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/recentPosition"
+            app:layout_constraintTop_toBottomOf="@id/recentPositionImage"
+            app:layout_constraintEnd_toEndOf="@id/recentPosition"
+            android:layout_marginTop="9dp"
+            android:includeFontPadding="false"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:textColor="@color/dark_grey"
+            android:text="@{recentInfo.positionRate}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

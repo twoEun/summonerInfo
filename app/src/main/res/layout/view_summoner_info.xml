@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="summonerInfo"
+            type="com.kkc.entity.dto.SummonerInfoDto" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="36dp"
+        android:paddingBottom="20dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/summonerProfileImage"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="16dp"
+            app:circleImage="@{summonerInfo.summonerProfileImage}"/>
+
+        <TextView
+            android:id="@+id/summonerLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/summonerProfileImage"
+            app:layout_constraintTop_toBottomOf="@id/summonerProfileImage"
+            app:layout_constraintEnd_toEndOf="@id/summonerProfileImage"
+            app:layout_constraintBottom_toBottomOf="@id/summonerProfileImage"
+            android:includeFontPadding="false"
+            android:paddingStart="6dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="6dp"
+            android:paddingBottom="3dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:background="@drawable/background_dark_grey_radius_12"
+            app:numberText="@{summonerInfo.summonerLevel}"
+            tools:text="247"/>
+
+        <TextView
+            android:id="@+id/summonerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/summonerProfileImage"
+            app:layout_constraintTop_toTopOf="@id/summonerProfileImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:includeFontPadding="false"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="22sp"
+            android:textColor="@color/dark_grey"
+            android:text="@{summonerInfo.summonerName}"/>
+
+        <TextView
+            android:id="@+id/infoRefresh"
+            android:layout_width="89dp"
+            android:layout_height="36dp"
+            app:layout_constraintStart_toStartOf="@id/summonerName"
+            app:layout_constraintTop_toBottomOf="@id/summonerName"
+            android:layout_marginTop="16dp"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="@string/summoner_info_refresh"
+            android:background="@drawable/background_soft_blue_radius_20" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/summonerLeagueInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/summonerLevel"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="31dp"
+            android:paddingStart="16dp"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            app:leagueList="@{summonerInfo.summonerLeagueList}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
